@@ -13,7 +13,7 @@ export default function Footer() {
           <p>{SITE.kampus}</p>
         </div>
         <div className="text-sm space-y-2">
-          <a href={SITE.instagram} className="block hover:text-amber">Instagram Panitia</a>
+          <a href={SITE.instagram} className="block hover:text-amber">Instagram Panitia.</a>
           <a href={SITE.websiteKampus} className="block hover:text-amber">Website UNISA Yogyakarta</a>
           <a href={SITE.whatsappPanitia} className="block hover:text-amber">Kontak Panitia</a>
         </div>
