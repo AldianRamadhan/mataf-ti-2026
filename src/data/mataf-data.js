@@ -334,7 +334,7 @@ export const committee = [
 
   // Koordinator Divisi
   { role: 'Koordinator Acara', name: 'Aldian Ramadhan Primadiansyah', division: 'Acara', level: 'koor' },
-  { role: 'Koordinator Humas', name: 'Suci Umi Kholifah', division: 'Humas', level: 'koor' },
+  { role: 'Koordinator Humas', name: 'Ananda Muthia Maghfira Salsabila', division: 'Humas', level: 'koor' },
   { role: 'Koordinator Media', name: "ARZA AL-A'LA PUTRA USGIANTO", division: 'Media', level: 'koor' },
   { role: 'Koordinator Perkab', name: 'ANANDA MUHAMMAD SYAIFUL HADJIM', division: 'Perkab', level: 'koor' },
   { role: 'Koordinator Konsumsi', name: 'MIFTAHUL JANNAH AZZAHRA', division: 'Konsumsi', level: 'koor' },
@@ -357,9 +357,9 @@ export const contacts = [
   },
   {
     label: 'Divisi Humas',
-    name: 'Suci Umi Kholifah',
-    phone: '+62 821-4721-5740',
-    whatsapp: 'https://wa.me/6282147215740'
+    name: 'Adis Medya Nuragustin',
+    phone: '+62 821-1793-3102',
+    whatsapp: 'https://wa.me/6282117933102'
   },
 ]
 

@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { assignments, getTomorrowEvent, events } from '../data/mataf-data.js'
 import { useCountdown } from '../hooks/useCountdown.js'
 import Checklist from '../components/Checklist.jsx'
+import TwibbonEditor from '../components/TwibbonEditor.jsx'
 
 export default function Assignments() {
   const tomorrow = getTomorrowEvent() || events[0]
+  const [activeTab, setActiveTab] = useState('twibbon') // 'twibbon' | 'video' | 'checklist'
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10 sm:py-14 space-y-10">
@@ -12,18 +14,79 @@ export default function Assignments() {
       {/* Header Halaman */}
       <div className="text-center sm:text-left border-b-2 border-black/15 dark:border-white/15 pb-6">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-950/80 text-blue-900 dark:text-blue-300 text-xs font-mono font-bold tracking-wider uppercase mb-3 border border-blue-300 dark:border-blue-700">
-          <span>●</span> Penugasan Mahasiswa Baru
+          <span>●</span> Penugasan & Twibbon Mahasiswa Baru
         </div>
         <h1 className="text-3xl sm:text-4xl font-black uppercase tracking-tight text-black dark:text-white">
-          Tugas & Perlengkapan MATAF TI
+          Tugas, Twibbon & Perlengkapan MATAF TI
         </h1>
         <p className="text-sm sm:text-base font-bold text-black/70 dark:text-white/60 mt-2">
-          Panduan lengkap penugasan kreatif dan checklist barang bawaan mahasiswa baru.
+          Studio pembuatan twibbon interaktif, panduan penugasan kreatif, dan checklist bawaan perlengkapan.
         </p>
       </div>
 
-      {/* 1. KOTAK CHECKLIST PERLENGKAPAN HARIAN */}
-      {tomorrow && tomorrow.bring && (
+      {/* Navigation Quick Tabs */}
+      <div className="flex flex-wrap items-center gap-2 p-1.5 bg-black/5 dark:bg-white/5 rounded-2xl border border-black/10 dark:border-white/10">
+        <button
+          onClick={() => setActiveTab('twibbon')}
+          className={`flex-1 min-w-[140px] py-2.5 px-4 rounded-xl font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
+            activeTab === 'twibbon'
+              ? 'bg-blue-600 text-white shadow-md'
+              : 'text-black/70 dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/5'
+          }`}
+        >
+          <span>🎨</span> Twibbon Studio
+        </button>
+        <button
+          onClick={() => setActiveTab('video')}
+          className={`flex-1 min-w-[140px] py-2.5 px-4 rounded-xl font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
+            activeTab === 'video'
+              ? 'bg-blue-600 text-white shadow-md'
+              : 'text-black/70 dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/5'
+          }`}
+        >
+          <span>🎬</span> Panduan Video
+        </button>
+        <button
+          onClick={() => setActiveTab('checklist')}
+          className={`flex-1 min-w-[140px] py-2.5 px-4 rounded-xl font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
+            activeTab === 'checklist'
+              ? 'bg-blue-600 text-white shadow-md'
+              : 'text-black/70 dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/5'
+          }`}
+        >
+          <span>🎒</span> Perlengkapan
+        </button>
+      </div>
+
+      {/* 1. TWIBBON STUDIO INTERAKTIF */}
+      {(activeTab === 'twibbon' || activeTab === 'all') && (
+        <section className="space-y-4">
+          <TwibbonEditor frameSrc="/Twibbon.png" />
+        </section>
+      )}
+
+      {/* 2. DAFTAR PENUGASAN KREATIF */}
+      {(activeTab === 'video' || activeTab === 'all') && (
+        <section className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl sm:text-2xl font-black uppercase text-black dark:text-white flex items-center gap-2">
+              <span>🎬</span> Penugasan Video Kreatif
+            </h2>
+            <span className="text-xs font-mono font-black uppercase px-2.5 py-1 rounded-md bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700">
+              Wajib untuk MABA
+            </span>
+          </div>
+
+          <div className="space-y-6">
+            {assignments.map((a) => (
+              <AssignmentDetailCard key={a.id} assignment={a} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 4. KOTAK CHECKLIST PERLENGKAPAN HARIAN */}
+      {(activeTab === 'checklist' || activeTab === 'all') && tomorrow && tomorrow.bring && (
         <section className="bg-white dark:bg-[#1a1a1a] rounded-2xl border-2 border-black/20 dark:border-white/15 p-6 shadow-sm">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 border-b border-black/10 dark:border-white/10 pb-3">
             <div>
@@ -41,24 +104,6 @@ export default function Assignments() {
           <Checklist storageKey={`checklist-${tomorrow.date}`} items={tomorrow.bring} />
         </section>
       )}
-
-      {/* 2. DAFTAR PENUGASAN KREATIF */}
-      <section className="space-y-6">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl sm:text-2xl font-black uppercase text-black dark:text-white flex items-center gap-2">
-            <span>🎬</span> Penugasan Video Kreatif
-          </h2>
-          <span className="text-xs font-mono font-black uppercase px-2.5 py-1 rounded-md bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700">
-            Wajib untuk MABA
-          </span>
-        </div>
-
-        <div className="space-y-6">
-          {assignments.map((a) => (
-            <AssignmentDetailCard key={a.id} assignment={a} />
-          ))}
-        </div>
-      </section>
 
     </div>
   )

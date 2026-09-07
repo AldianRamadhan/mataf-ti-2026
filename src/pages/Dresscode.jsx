@@ -15,7 +15,7 @@ const DRESSCODES = [
     id: 'laki-laki',
     title: 'Laki-Laki',
     subtitle: 'Contoh Pakaian Resmi Mahasiswa Baru',
-    image: '/galang.jpg',
+    image: '/laki lak.jpg',
     badge: 'Laki-Laki',
     icon: '👨'
   },
@@ -23,7 +23,7 @@ const DRESSCODES = [
     id: 'perempuan',
     title: 'Perempuan',
     subtitle: 'Contoh Pakaian Resmi Mahasiswi Baru',
-    image: '/nala.jpg',
+    image: '/perepuan.jpeg',
     badge: 'Perempuan',
     icon: '🧕'
   }
